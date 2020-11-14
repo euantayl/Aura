@@ -30,7 +30,7 @@ Usage
 
        aura_calc.translate(content)            # Translates a string to or from a given language. If no language is given, it will translate from detected to English 
        aura_calc.openProgramsCheck()     # Returns a string of currently running programs split by '\n' (this returns a string instead of a list to be compatible with aura_discord)
-       aura_calc.openFile(content)            # Attempts to find a given file name in the C: folder and runs a file if any is found
+       aura_calc.openFile(content)            # Attempts to find a given file name in the C: directory and runs a file if any is found
       -------------------------------------
 
 
