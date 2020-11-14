@@ -14,14 +14,14 @@ when it started as 'Fanqaich', or 'Fully Automated Not Quite Artificial Intellig
 _________________________________________________
 Installation
 
-Edit the program to fill in your details into the required fields, and save aura_calc in the same folder as your project, or in your python scripts folder.
+
       --------------
        extPath = ''       # where the user wants to control files from
        intPath = ''        # where the individual aura files are stored
        bitKey = ['']       # bit.ly api key
       --------------
 
-
+Edit the program to fill in your details into the required fields, and save aura_calc in the same folder as your project, or in your python scripts folder.
 _________________________________________________
 Usage
 
