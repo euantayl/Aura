@@ -15,23 +15,23 @@ _________________________________________________
 Installation
 
 
-      --------------
+
        extPath = ''       # where the user wants to control files from
        intPath = ''        # where the individual aura files are stored
        bitKey = ['']       # bit.ly api key
-      --------------
+
 
 Edit the program to fill in your details into the required fields, and save aura_calc in the same folder as your project, or in your python scripts folder.
 _________________________________________________
 Usage
 
-      -------------------------------------
+
        import aura_calc
 
        aura_calc.translate(content)            # Translates a string to or from a given language. If no language is given, it will translate from detected to English 
        aura_calc.openProgramsCheck()     # Returns a string of currently running programs split by '\n' (this returns a string instead of a list to be compatible with aura_discord)
        aura_calc.openFile(content)            # Attempts to find a given file name in the C: directory and runs a file if any is found
-      -------------------------------------
+
 
 
 _________________________________________________
