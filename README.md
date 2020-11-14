@@ -21,7 +21,7 @@ Installation
        bitKey = ['']       # bit.ly api key
 
 
-Edit the program to fill in your details into the required fields, and save aura_calc in the same folder as your project, or in your python scripts folder.
+Edit the program to fill in your details into the required fields, and save aura_calc in the same folder as your project, or in your python scripts folder. This is going to be updated to be more user friendly in future updates.
 _________________________________________________
 Usage
 
