@@ -41,6 +41,7 @@ Future Update Plans
  - Add hardware volume controls
  - Add the ability to give a reminder when the user returns to their PC
  - Add the ability to virtually press a key or keys through online commands
+ - Update the installation procedure
 
 
 _________________________________________________
