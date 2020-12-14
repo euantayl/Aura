@@ -17,6 +17,9 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from googletrans import Translator
 from datetime import datetime
+from sound import Sound
+from keyboard import Keyboard
+from pathlib import Path
 
 #-------------------------------------------------------------------- user defined variables
 
@@ -65,6 +68,9 @@ def openProgramsCheck():
 
 def test():
     return True
+
+def getCurrentVolume():
+    return Sound.current_volume()
 
 #-------------------------------------------------------------------- return with variable
 
@@ -191,6 +197,23 @@ def openSpotify():
 def openStardewValley():
     os.startfile(intPath + 'apps/Stardew Valley.url')
 
+def volumeDown():
+    currentVolume = Sound.current_volume()
+    desiredVolume = int(currentVolume) - 20
+    if desiredVolume < 0:
+        desiredVolume = 0
+    Sound.volume_set(desiredVolume)
+
+def volumeUp():
+    currentVolume = Sound.current_volume()
+    desiredVolume = int(currentVolume) + 20
+    if desiredVolume > 100:
+        desiredVolume = 100
+    Sound.volume_set(desiredVolume)
+
+def volumeOff():
+    Sound.volume_min()
+
 #-------------------------------------------------------------------- PC control with variables
 
 def openFile(content):
@@ -225,9 +248,54 @@ def openFile(content):
 def pronounce(content):
     query = content.replace('say', '')                      # remove both probable capitalization variants of the command word without using .lower()
     query = query.replace('Say', '')                        # i don't use .lower() so i can keep any capitalization semantics of the given phrase
-    tts = gTTS(query)                                       # give the input to the google text to speech
+    tts = gTTS(query)                                       # give the input to google text to speech
     tts.save(intPath + 'temp/Aura.mp3')                     # save the mp3 in a temporary location
     os.startfile(intPath + 'temp/Aura.mp3')                 # play the mp3 using the OS library
+
+def setVolume(value):
+    Sound.volume_set(value)
+
+def textReminder(content):
+    text = content.replace('remind me ', '')                # remove both probable capitalization variants of the command word without using .lower()
+    text = text.replace('Remind me ', '')                   # i don't use .lower() so i can keep the capitalization of the given reminder
+    fileName = (text[0] + text[1] + text[2])                # set the fileName to be the first 3 characters of the reminder
+    fullFileName = (str(intPath) + 'reminders/' + str(fileName) + '.txt') # create a directory to a txt file
+    fullFileName = Path(fullFileName)                       # convert string into a path object
+    if fullFileName.exists():                               # check if the file already exists
+        modifier = 1                                        # the number that is added to the end of a file to make it unique                        
+        alreadyExists = True                                # start a while loop
+        while alreadyExists:
+            tempFileName = str(fullFileName).replace('.txt', '') # remove '.txt' from the string
+            tempFileName = str(tempFileName) + str(modifier)     # add the modifier number at the end
+            tempFileName = str(tempFileName) + '.txt'            # bring '.txt' back
+            tempFileName = Path(tempFileName)               # convert to a path object again
+            if tempFileName.exists():                       # if this new filename exists too,
+                modifier = modifier + 1                     # increase the modifier by one
+            else:                                           # else,
+                fullFileName = tempFileName                 # move the data to fullFileName
+                alreadyExists = False                       # break the loop.
+    file = open(fullFileName, 'w')                          # create the new txt file
+    file.write(text)                                        # write the data
+    file.close()
+    os.startfile(fullFileName)                              # open the file to show on screen
+
+def pressKey(keyName):
+    keyName = keyName.replace('press ', '')
+    keyCode = keyName.upper()
+    keyCode = "VK_" + str(keyCode)
+    method_to_call = getattr(Keyboard, keyCode)
+    Keyboard.key(method_to_call, 0.2)
+
+def typeString(desString):                           
+    desString = desString.replace('type ', '')       
+    numOfChars = len(desString)                                           
+    for i in range(numOfChars):         
+        keyCode = desString[i].upper()              
+        if keyCode == ' ':           
+            keyCode = 'SPACE' 
+        keyCode = "VK_" + str(keyCode)                  
+        method_to_call = getattr(Keyboard, keyCode)
+        Keyboard.key(method_to_call, 0.2)
 
 #-------------------------------------------------------------------- others
 
